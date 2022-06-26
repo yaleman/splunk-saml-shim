@@ -1,4 +1,4 @@
-""" A shim that sits between splunk and you, to make pulling the SAML metadata easier """
+""" A shim that sits between Splunk and you, to make pulling the SAML metadata easier """
 
 # pylint: disable=too-few-public-methods
 
@@ -16,7 +16,7 @@ from fastapi import Depends, FastAPI, Response, HTTPException
 from fastapi.security import HTTPBasic, HTTPBasicCredentials
 from pydantic import BaseSettings
 
-
+# ref: https://docs.splunk.com/Documentation/Splunk/9.0.0/RESTREF/RESTaccess#admin.2FSAML-sp-metadata
 URI_SP_METADATA = "/services/admin/SAML-sp-metadata"
 
 
