@@ -11,6 +11,9 @@ fastapi = "^0.78.0"
 pydantic = {extras = ["dotenv"], version = "^1.9.1"}
 aiohttp = "^3.8.1"
 uvicorn = "^0.18.1"
+watchfiles = "^0.15.0"
+beautifulsoup4 = "^4.11.1"
+lxml = "^4.9.0"
 
 [tool.poetry.dev-dependencies]
 pylint-pydantic = "^0.1.4"
