@@ -13,7 +13,7 @@ import uvicorn  # type: ignore
 @click.option("--host", type=str)
 @click.option("--proxy-headers", is_flag=True)
 def cli(
-    reload: bool = True,
+    reload: bool = False,
     port: int = 8000,
     host: Optional[str] = None,
     proxy_headers: bool = False,

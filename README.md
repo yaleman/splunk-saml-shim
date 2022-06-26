@@ -13,13 +13,24 @@ Install this library using `pip`:
 
     $ python -m pip install git+https://github.com/yaleman/splunk-saml-shim
 
-## Usage
 
-Copy the example.env and set your settings.
-
+## Building the container
 
 ```shell
-docker run --rm -it ghcr.io/yaleman/splunk-saml-shim:latest
+docker build -t ghcr.io/yaleman/splunk-saml-shim:latest .
+```
+
+## Usage
+
+Copy the example.env to .env and set your settings.
+
+Run it in a container:
+
+```shell
+docker run --rm -it \
+    -v $(pwd)/.env:/data/.env \
+    -p 8000:8000 \
+    ghcr.io/yaleman/splunk-saml-shim:latest
 ```
 
 ### Authentication
