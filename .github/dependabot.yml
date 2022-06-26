@@ -1,9 +1,9 @@
 version: 2
 updates:
 - package-ecosystem: pip
-  directory: "/"
+  directory: /
   schedule:
     interval: weekly
-    time: "06:00"
-    timezone: Australia/Brisbane
-  open-pull-requests-limit: 99
+    day: saturday
+    time: "02:00"
+    timezone: "Australia/Brisbane"
