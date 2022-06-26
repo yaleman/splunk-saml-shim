@@ -2,18 +2,25 @@
 name = "splunk-saml-shim"
 version = "0.0.1"
 description = ""
-authors = ["James Hogkinson <james@terminaloutcomes.com>"]
+authors = [
+    "James Hogkinson <james@terminaloutcomes.com>",
+]
 license = "MIT"
 
 [tool.poetry.dependencies]
 python = "^3.9"
 fastapi = "^0.78.0"
-pydantic = {extras = ["dotenv"], version = "^1.9.1"}
 aiohttp = "^3.8.1"
 uvicorn = "^0.18.1"
 watchfiles = "^0.15.0"
 beautifulsoup4 = "^4.11.1"
 lxml = "^4.9.0"
+
+[tool.poetry.dependencies.pydantic]
+extras = [
+    "dotenv",
+]
+version = "^1.9.1"
 
 [tool.poetry.dev-dependencies]
 pylint-pydantic = "^0.1.4"
@@ -22,13 +29,20 @@ pylint = "^2.14.3"
 mypy = "^0.961"
 black = "^22.3.0"
 
+[tool.pylint.MASTER]
+max-line-length = 200
+
 [build-system]
-requires = ["poetry-core>=1.0.0"]
+requires = [
+    "poetry-core>=1.0.0",
+]
 build-backend = "poetry.core.masonry.api"
 
-[tool.pylint.MASTER]
-max-line-length=200
-
-# https://github.com/samuelcolvin/pydantic/issues/1961#issuecomment-759522422
-#extension-pkg-whitelist=pydantic
-#load-plugins=pylint_pydantic
+[project]
+name = "splunk-saml-shim"
+description = ""
+license = "MIT"
+version = "0.0.1"
+authors = [
+    { name = "James Hogkinson", email = "james@terminaloutcomes.com" },
+]
