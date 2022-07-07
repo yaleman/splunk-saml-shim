@@ -14,7 +14,7 @@ aiohttp = "^3.8.1"
 uvicorn = "^0.18.1"
 watchfiles = "^0.15.0"
 beautifulsoup4 = "^4.11.1"
-lxml = "^4.9.0"
+lxml = "^4.9.1"
 
 [tool.poetry.dependencies.pydantic]
 extras = [
