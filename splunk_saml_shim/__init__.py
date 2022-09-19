@@ -48,7 +48,6 @@ class AppConfig(BaseSettings):
 
 
 settings = AppConfig()
-logging.basicConfig(level=settings.log_level)
 app = FastAPI()
 
 # this grabs the basic auth
@@ -66,17 +65,22 @@ def get_metadata(soup: BeautifulSoup) -> bs4.element.Tag:
 
 def update_netloc(parsed_url: urllib.parse.ParseResult) -> str:
     """ take the parsed URL and return an updated location """
-    scheme = settings.dict().get("rewrite_scheme", parsed_url.scheme)
-    netloc = settings.dict().get("rewrite_host", parsed_url.netloc)
+    if settings.dict().get("rewrite_scheme") is not None:
+        scheme = settings.dict().get("rewrite_scheme")
+    else:
+        scheme = parsed_url.scheme
+    if settings.dict().get("rewrite_host") is not None:
+        hostname = settings.dict().get("rewrite_host")
+    else:
+        hostname = parsed_url.netloc
 
-    retval = f"{scheme}://{netloc}{parsed_url.path}"
+    retval = f"{scheme}://{hostname}{parsed_url.path}"
     if parsed_url.params:
         retval += f";{parsed_url.params}"
     if parsed_url.query:
         retval += f"?{parsed_url.query}"
     if parsed_url.fragment:
         retval += f"#{parsed_url.fragment}"
-    logging.debug("update_netloc: %s", retval)
     return retval
 
 
