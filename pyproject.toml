@@ -43,7 +43,6 @@ build-backend = "poetry.core.masonry.api"
 name = "splunk-saml-shim"
 description = ""
 license = "MIT"
-version = "0.0.1"
 authors = [
     { name = "James Hogkinson", email = "james@terminaloutcomes.com" },
 ]
