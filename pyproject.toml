@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "splunk-saml-shim"
-version = "0.0.1"
+version = "0.0.2"
 description = ""
 authors = [
     "James Hogkinson <james@terminaloutcomes.com>",
