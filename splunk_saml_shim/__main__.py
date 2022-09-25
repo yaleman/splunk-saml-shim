@@ -6,6 +6,7 @@ from typing import Optional
 import click
 import uvicorn  # type: ignore
 
+from . import AppConfig
 
 @click.command()
 @click.option("--reload", is_flag=True)
@@ -18,9 +19,10 @@ def cli(
     port: int = 8000,
     host: Optional[str] = None,
     proxy_headers: bool = False,
-    debug: bool = False,
+    debug: bool = False
 ) -> None:
     """github_linter server"""
+    settings = AppConfig()
 
     if host is None:
         host = "0.0.0.0"  # nosec
@@ -38,6 +40,7 @@ def cli(
         workers=4,
         reload=reload,
         reload_dirs=["splunk_saml_shim/"],
+        root_path=settings.root_path
     )
 
 if __name__ == "__main__":

@@ -34,6 +34,8 @@ class AppConfig(BaseSettings):
     rewrite_scheme: Optional[str] = None
 
     log_level: str = "INFO"
+    # if this is going to be hosted under a sub-path set it here
+    root_path: str = "/"
 
     class Config:
         """config of the config"""
@@ -48,7 +50,7 @@ class AppConfig(BaseSettings):
 
 
 settings = AppConfig()
-app = FastAPI()
+app = FastAPI(root_path=settings.root_path)
 
 # this grabs the basic auth
 security = HTTPBasic(auto_error=False)
