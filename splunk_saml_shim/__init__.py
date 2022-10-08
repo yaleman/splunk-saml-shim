@@ -9,16 +9,14 @@ import urllib.parse
 
 import aiohttp
 import aiohttp.client_exceptions
-from bs4 import BeautifulSoup
-import bs4.element # type: ignore
+from bs4 import BeautifulSoup # type: ignore[import]
+import bs4.element # type: ignore[import]
 from fastapi import Depends, FastAPI, Response, HTTPException
-
 from fastapi.security import HTTPBasic, HTTPBasicCredentials
 from pydantic import BaseSettings
 
 # ref: https://docs.splunk.com/Documentation/Splunk/9.0.0/RESTREF/RESTaccess#admin.2FSAML-sp-metadata
 URI_SP_METADATA = "/services/admin/SAML-sp-metadata"
-
 
 class AppConfig(BaseSettings):
     """configuration"""
