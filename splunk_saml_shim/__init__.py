@@ -15,8 +15,8 @@ from fastapi import Depends, FastAPI, Response, HTTPException
 from fastapi.security import HTTPBasic, HTTPBasicCredentials
 from pydantic import BaseSettings
 
-from lxml import etree # type: ignore[import]
 
+from .utils import get_cert_from_xml
 
 # ref: https://docs.splunk.com/Documentation/Splunk/9.0.0/RESTREF/RESTaccess#admin.2FSAML-sp-metadata
 URI_SP_METADATA = "/services/admin/SAML-sp-metadata"
@@ -142,46 +142,6 @@ def parse_xml_error(content: bytes) -> str:
     if not message:
         return content.decode("utf-8")
     return str(message.text)
-
-def get_cert_from_xml(xmldata: bytes) -> Optional[str]:
-    """ pulls the cert from the XML"""
-
-    idpspasstree = etree.fromstring(xmldata)
-    # idpspassroot = idpspasstree.getroot()
-    # entityId = idpspassroot.get('entityID')
-    # self.idpMetaDetails._entityId = entityId
-    namespace_xmlns = 'urn:oasis:names:tc:SAML:2.0:metadata'
-    xpath_selector = "//x:KeyDescriptor[@use='signing']/*/*/*"
-    # signing_keyDescriptors = idpspasstree.xpath(xpath_selector, namespaces={'x': namespace_xmlns})
-    xpath_selector = "//x:KeyDescriptor[@use='encryption']/*/*/*"
-    encryption_key_descriptors = idpspasstree.xpath(xpath_selector, namespaces={'x': namespace_xmlns})
-    # for signingKeyInfo in signing_keyDescriptors:
-    #     signingcert = signingKeyInfo.text.strip()
-    #     # self.idpMetaDetails._signingCert = signingcert
-    #     break
-    content = None
-
-    for encryption_key_info in encryption_key_descriptors:
-        encryptcert = encryption_key_info.text.strip()
-        content = encryptcert
-        # self.idpMetaDetails._encryptionCert = encryptcert
-        break
-    # xpath_selector = "//x:ArtifactResolutionService"
-    # artifactResolution = idpspasstree.xpath(xpath_selector, namespaces={'x': namespace_xmlns})
-    # for artifacts in artifactResolution:
-    #     if artifacts.attrib.get('Binding') == 'urn:oasis:names:tc:SAML:2.0:bindings:SOAP' and artifacts.attrib.get(
-    #             'index') == '0' and artifacts.attrib.get('isDefault') == 'true':
-    #         httploc = artifacts.attrib.get('Location')
-    #         self.idpMetaDetails._location = httploc
-    #         break
-    # return self.idpMetaDetails
-    # message = soup.find("md:EmailAddress", recursive=True) #:X509Certificate
-    # print(f"{message=}")
-
-    # if message:
-        # content = message
-
-    return content
 
 @app.get("/extract_idp_cert")
 async def extract_idp_cert() -> Response:

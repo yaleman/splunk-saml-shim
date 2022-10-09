@@ -1,7 +1,6 @@
 """ testing the idp cert thing """
 
-
-from splunk_saml_shim import get_cert_from_xml
+from splunk_saml_shim.utils import get_cert_from_xml
 
 TEST_XML = """<md:EntityDescriptor xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" entityID="https://saml.yaleman.org">
   <md:IDPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
