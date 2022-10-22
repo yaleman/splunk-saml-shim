@@ -4,7 +4,7 @@ import logging
 from typing import Optional
 
 import click
-import uvicorn  # type: ignore
+import uvicorn
 
 from . import AppConfig
 

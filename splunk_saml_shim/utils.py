@@ -1,7 +1,10 @@
 """ utils for things """
 from typing import Optional
-from lxml import etree # type: ignore[import]
 
+import warnings #pylint: disable=wrong-import-order
+warnings.filterwarnings("ignore", "defusedxml.lxml is no longer supported and will be removed in a future release.", DeprecationWarning)
+#pylint: disable=wrong-import-position
+from defusedxml.lxml import _etree as etree #type: ignore
 
 def get_cert_from_xml(xmldata: bytes) -> Optional[str]:
     """ pulls the cert from the XML"""
